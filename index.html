@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#faf7ed">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="description" content="SpeedRead — спокойное чтение по одному слову. Книги и прогресс остаются на вашем устройстве.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="stylesheet" href="./style.css">
+  <title>SpeedRead</title>
+</head>
+<body>
+<main id="app" aria-label="SpeedRead">
+  <section id="reader">
+    <header class="top controls">
+      <button id="menuButton" class="icon" aria-label="Открыть библиотеку">☰</button>
+      <span class="brand">SPEED<span>READ</span></span>
+      <button id="themeButton" class="icon" aria-label="Переключить тему">◐</button>
+    </header>
+    <div class="book-heading controls"><p class="eyebrow">ВАША ТОЧКА ВНИМАНИЯ</p><h1 id="bookTitle">Знакомство с SpeedRead</h1><p id="status">Пауза</p></div>
+    <div id="stage" tabindex="0" role="button" aria-label="Чтение. Двойное нажатие открывает полный текст">
+      <i class="tick top-tick"></i>
+      <div id="word" aria-live="off"><span id="before"></span><span id="pivot"></span><span id="after"></span></div>
+      <i class="tick bottom-tick"></i>
+    </div>
+    <div id="speedControls">
+      <div class="speed-row"><button id="slower" class="speed-step controls" aria-label="Уменьшить скорость на 10">−</button><div class="speed-value"><button id="speedNumber" aria-label="Ввести скорость">250</button><input id="speedInput" type="number" inputmode="numeric" min="1" max="750" aria-label="Скорость от 1 до 750" hidden><small>слов / мин</small></div><button id="faster" class="speed-step controls" aria-label="Увеличить скорость на 10">+</button></div>
+      <input id="speedRange" class="controls" type="range" min="1" max="750" value="250" aria-label="Скорость чтения">
+      <div class="range-labels controls"><span>1</span><span>БАЗОВЫЙ ТЕМП</span><span>750</span></div>
+    </div>
+    <div class="reader-footer controls"><button id="playButton" class="primary" aria-label="Начать чтение">▶ <span>Читать</span></button><p id="remaining">≈ 0 часов, 1 минута</p><div class="progress-meta"><span id="position">0%</span><span id="tokenCount"></span></div><progress id="progress" value="0" max="1" aria-label="Прогресс книги"></progress></div>
+  </section>
+  <section id="fullText" hidden aria-label="Полный текст книги">
+    <header class="text-header"><button id="closeText" class="text-back">← К чтению</button><span class="eyebrow">ПОЛНЫЙ ТЕКСТ</span><h2 id="fullTitle"></h2><p>Нажмите на слово, чтобы читать с этого места</p></header>
+    <article id="bookPage" tabindex="0" aria-label="Текст текущей страницы"></article>
+    <footer class="text-footer"><div class="page-nav"><button id="prevPage" aria-label="Предыдущая страница">←</button><span id="pageLabel"></span><button id="nextPage" aria-label="Следующая страница">→</button></div><input id="pageRange" type="range" min="1" max="1" value="1" aria-label="Перейти к странице"><button id="currentPage" class="subtle">К текущему слову</button></footer>
+  </section>
+  <button id="scrim" hidden aria-label="Закрыть библиотеку"></button>
+  <aside id="drawer" inert aria-label="Библиотека">
+    <header><span class="eyebrow">SPEEDREAD · НА УСТРОЙСТВЕ</span><button id="closeMenu" class="icon" aria-label="Закрыть меню">×</button></header>
+    <h2>Моё чтение<span>.</span></h2><div class="stats"><div><strong id="booksStat">0</strong><small>книг прочитано</small></div><div><strong id="wordsStat">0</strong><small>слов прочитано</small></div><div><strong id="speedStat">0</strong><small>слов/мин фактически</small></div></div>
+    <button id="importButton" class="primary">+ Открыть EPUB</button><input id="epubFile" type="file" accept=".epub,application/epub+zip" hidden>
+    <div class="library-title"><h3>Библиотека</h3><span id="libraryCount">0</span></div><div id="library"></div>
+    <div class="tools"><button id="demoButton">Демонстрация</button><button id="backupButton">Сохранить резервную копию</button><button id="restoreButton">Перенести книги и прогресс · JSON</button><input id="restoreFiles" type="file" accept=".json,application/json" multiple hidden><button id="installButton" hidden>Установить приложение</button></div>
+    <p class="local-note">Без аккаунта и интернета.<br>Книги хранятся в этом браузере.</p><p id="offlineStatus" class="local-note">Подготовка офлайн-режима…</p>
+  </aside>
+  <div id="notice" role="status" hidden></div>
+  <dialog id="restoreDialog"><h2>Перенос прогресса</h2><p>Заменить настройки, позиции и достижения данными из выбранного файла? Существующие книги сохранятся. Перед заменой можно сделать резервную копию.</p><div><button id="cancelRestore">Отмена</button><button id="confirmRestore" class="primary">Перенести</button></div></dialog>
+</main>
+<script type="module" src="./app.js"></script>
+</body>
+</html>
